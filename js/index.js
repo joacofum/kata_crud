@@ -2,8 +2,12 @@ document.addEventListener('DOMContentLoaded', inicio, false);
 
 function inicio () {
     //Variables del dom van con $ para diferenciarlas
-    const d = document, $table = d.querySelector(".crud-table"), $form = d.querySelector(".crud-form"), 
-    $title = d.querySelector(".crud-title"), $template = d.getElementById("crud-template").content, $fragment = d.createDocumentFragment();
+    const d = document, 
+    $table = d.querySelector(".crud-table"), 
+    $form = d.querySelector(".crud-form"), 
+    $title = d.querySelector(".crud-title"),
+    $template = d.getElementById("crud-template").content,
+    $fragment = d.createDocumentFragment();
 
     const getAll = async () => {
         try {
@@ -51,7 +55,7 @@ function inicio () {
             $form.nombre.value = e.target.dataset.name;
             $form.constelacion.value = e.target.dataset.constellation;
             $form.id.value = e.target.dataset.id;
-        }     
+        }
 
         if (e.target.matches(".delete")) {
             let isDelete = confirm(`¿Estás seguro de eliminar el id ${e.target.dataset.id}?`);
@@ -91,12 +95,17 @@ async function ejecutarAjax(metodo, evento){
                     constelacion: evento.target.constelacion.value
                 })
             }
-            var res = await axios("http://localhost:3000/santos", options);     
+            if(metodo === "PUT"){
+                let id = document.getElementById("id");
+                var res = await axios(`http://localhost:3000/santos/${id.value}`, options);
+                id.value = "";
+            }else{
+                var res = await axios("http://localhost:3000/santos", options);     
+            }
         }
         let json = await res.data;
         location.reload();
     } catch (err) {
-        console.log(err);
         mostrarError(err); 
     }
 }
