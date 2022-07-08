@@ -26,9 +26,14 @@
       "constelacion": "Fénix"
     },
     {
-      "nombre": "Messi",
-      "constelacion": "Via Lactea",
-      "id": 6
+      "nombre": "Pistolero",
+      "constelacion": "Marte",
+      "id": 7
+    },
+    {
+      "nombre": "Mohamed",
+      "constelacion": "Egipcia",
+      "id": 8
     }
   ]
 }
